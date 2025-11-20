@@ -1,0 +1,258 @@
+{
+  "timestamp": "2025-11-20T02:00:00Z",
+  "project": "res-downloader",
+  "description": "高性能多样化资源下载器 - Wails v2 桌面应用",
+  "modules": [
+    {
+      "path": "core",
+      "language": "Go",
+      "entryFile": "main.go",
+      "interfaces": [
+        "Config()",
+        "AppInfo()",
+        "ResetApp()"
+      ],
+      "submodules": [
+        {
+          "path": "core/plugins",
+          "files": ["plugin.default.go", "plugin.qq.com.go"],
+          "description": "插件系统 - 支持域名特定的资源拦截和处理"
+        },
+        {
+          "path": "core/shared",
+          "files": ["base.go", "utils.go", "const.go", "plugin.go"],
+          "description": "共享组件 - 通用工具和基础结构"
+        }
+      ],
+      "testPaths": [],
+      "configFiles": ["go.mod", "go.sum", "wails.json"],
+      "qualityTools": ["go fmt"],
+      "coverage": {
+        "scannedFiles": 30,
+        "totalFiles": 30,
+        "percentage": 100
+      },
+      "keyFeatures": [
+        "多线程下载引擎",
+        "HTTP代理服务器",
+        "插件化架构",
+        "跨平台系统适配"
+      ]
+    },
+    {
+      "path": "frontend",
+      "language": "Vue 3 + TypeScript",
+      "entryFile": "frontend/src/main.ts",
+      "interfaces": [
+        "api/app.ts",
+        "api/request.ts",
+        "wailsjs/go/core/Bind"
+      ],
+      "components": [
+        "Action.vue - 操作按钮组件",
+        "Preview.vue - 文件预览组件（支持视频播放）",
+        "ImportJson.vue - 数据导入组件",
+        "Password.vue - 密码输入组件",
+        "ShowLoading.vue - 加载状态组件",
+        "Screen.vue - 屏幕截图组件",
+        "layout/Index.vue - 主布局",
+        "layout/Sider.vue - 侧边栏"
+      ],
+      "views": [
+        "views/index.vue - 主页面（下载管理）",
+        "views/setting.vue - 设置页面"
+      ],
+      "stores": [
+        "stores/index.ts - 主状态管理",
+        "stores/event.ts - 事件处理系统"
+      ],
+      "testPaths": [],
+      "configFiles": [
+        "package.json",
+        "package-lock.json",
+        "vite.config.ts",
+        "tsconfig.json",
+        "tsconfig.app.json",
+        "tsconfig.node.json",
+        "tailwind.config.js",
+        "postcss.config.js",
+        "wailsjs/runtime/package.json"
+      ],
+      "qualityTools": ["ESLint", "Prettier", "TypeScript", "Vue TSC"],
+      "coverage": {
+        "scannedFiles": 58,
+        "totalFiles": 60,
+        "percentage": 97
+      },
+      "keyFeatures": [
+        "现代化Vue 3 + Composition API",
+        "Naive UI组件库",
+        "响应式布局设计",
+        "国际化支持",
+        "视频预览播放",
+        "文件解密功能"
+      ]
+    },
+    {
+      "path": "build",
+      "language": "配置文件",
+      "description": "多平台构建配置和资源文件",
+      "submodules": [
+        {
+          "path": "build/darwin",
+          "files": ["Info.plist", "Info.dev.plist"],
+          "description": "macOS应用配置"
+        },
+        {
+          "path": "build/linux",
+          "files": ["dockerfile", ".gitignore", "AppImage配置", "Debian配置"],
+          "description": "Linux构建配置"
+        },
+        {
+          "path": "build/windows",
+          "files": ["installer/project.nsi", "info.json", "icon.ico", "wails.exe.manifest"],
+          "description": "Windows安装配置"
+        }
+      ],
+      "coverage": {
+        "scannedFiles": 25,
+        "totalFiles": 25,
+        "percentage": 100
+      },
+      "keyFeatures": [
+        "跨平台构建支持",
+        "Docker容器化",
+        "Windows NSIS安装包",
+        "Linux AppImage/Debian包",
+        "macOS应用包"
+      ]
+    },
+    {
+      "path": "docs",
+      "language": "Markdown",
+      "description": "项目文档和使用说明",
+      "files": [
+        "index.html",
+        "readme.md",
+        "getting-started.md",
+        "installation.md",
+        "troubleshooting.md",
+        "examples.md",
+        "more.md",
+        "_coverpage.md",
+        "_navbar.md",
+        "_sidebar.md",
+        "favicon.ico",
+        "images/"
+      ],
+      "coverage": {
+        "scannedFiles": 25,
+        "totalFiles": 25,
+        "percentage": 100
+      }
+    }
+  ],
+  "totalStats": {
+    "scannedFiles": 138,
+    "totalFiles": 140,
+    "coveragePercentage": 98.6,
+    "ignoredFiles": 18,
+    "ignoredDirectories": ["node_modules", "dist", "build/bin", ".git", "frontend/dist"]
+  },
+  "finalDiscoveries": {
+    "coreDependencies": [
+      {
+        "name": "go.mod",
+        "version": "1.22.0",
+        "keyPackages": [
+          "github.com/wailsapp/wails/v2 v2.10.1",
+          "github.com/elazarl/goproxy",
+          "github.com/rs/zerolog v1.33.0",
+          "golang.org/x/net v0.35.0"
+        ]
+      }
+    ],
+    "frontendConfigs": [
+      {
+        "name": "vite.config.ts",
+        "plugins": ["vue", "AutoImport", "Components", "NaiveUiResolver"]
+      },
+      {
+        "name": "tsconfig.json",
+        "features": ["ESNext", "strict mode", "path aliases", "Naive UI types"]
+      },
+      {
+        "name": "tailwind.config.js",
+        "features": ["darkMode selector", "Naive UI compatibility"]
+      }
+    ],
+    "buildConfigs": [
+      {
+        "name": "wails.json",
+        "version": "3.1.2",
+        "author": "putyy",
+        "buildCommands": ["npm install", "npm run build"]
+      },
+      {
+        "name": "dockerfile",
+        "base": "golang:1.24.2-bookworm",
+        "includes": ["Node.js 20", "Wails CLI", "GTK/Webkit deps"]
+      },
+      {
+        "name": "NSIS Installer",
+        "features": ["Webview2 runtime", "file associations", "shortcuts"]
+      }
+    ],
+    "hiddenFiles": [
+      ".gitignore",
+      "build/linux/.gitignore",
+      "build/linux/AppImage/.DirIcon",
+      "build/linux/AppImage/usr/.DS_Store",
+      "build/linux/Debian/.DS_Store",
+      "build/linux/AppImage/usr/bin/.gitkeep",
+      "build/linux/Debian/usr/local/bin/.gitkeep",
+      "docs/.nojekyll"
+    ]
+  },
+  "scanGaps": [
+    {
+      "module": "core",
+      "missing": [
+        "单元测试文件 (*_test.go)",
+        "集成测试",
+        "性能基准测试",
+        "API文档"
+      ]
+    },
+    {
+      "module": "frontend",
+      "missing": [
+        "组件单元测试 (*.spec.ts)",
+        "端到端测试",
+        "Storybook组件文档",
+        "TypeScript类型覆盖率报告"
+      ]
+    }
+  ],
+  "recommendations": [
+    "🎯 覆盖率已达到目标：98.6%",
+    "✅ 完成所有构建配置文件深度分析",
+    "✅ 完成隐藏文件和特殊文件扫描",
+    "✅ 完成依赖管理和版本控制分析",
+    "为核心模块添加Go单元测试",
+    "为前端组件添加Vue Test Utils测试",
+    "完善API文档和开发者指南",
+    "考虑添加CI/CD配置文件"
+  ],
+  "truncated": false,
+  "finalScanComplete": true,
+  "coverageGoalAchieved": true,
+  "finalCoveragePercentage": 98.6,
+  "remainingUnscannedFiles": 2,
+  "nextScanPriority": [
+    "添加单元测试和集成测试",
+    "完善开发者文档",
+    "设置CI/CD流水线",
+    "性能监控和日志分析"
+  ]
+}
